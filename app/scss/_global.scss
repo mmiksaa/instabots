@@ -27,6 +27,19 @@ body {
   @include r($md) {
     padding: 8px;
   }
+
+  & * {
+    &::-webkit-scrollbar {
+      width: 1px !important;
+      background-color: rgba(26, 24, 47, 0.15) !important;
+      border-radius: 5px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(234, 107, 129, 0.5) !important;
+      border-radius: 5px !important;
+    }
+  }
 }
 
 .body--active {
@@ -56,6 +69,10 @@ body {
 
 .container {
   padding: 0 20px;
+  @include r($md) {
+    padding: 0;
+  }
+
 }
 
 .caps {
@@ -69,7 +86,7 @@ body {
     padding-top1: 80px !important;
     padding-bottom: 80px !important;
   }
-}
+} 
 
 .burger {
   content: url('../images/icons/burger.svg');
