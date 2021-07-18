@@ -89,15 +89,15 @@
       position: absolute;
       padding: 0;
       width: 100%;
+      z-index: 19;
       top: 0;
+      display: block;
       left: 0;
-      height: calc(100vh - 30px);
+      height: calc(100vh - 50px);
     }
 
     &--active {
-      display: block;
       transform: translateY(0%);
-      z-index: 19;
     }
   }
 
@@ -218,9 +218,10 @@
     max-width: 500px;
     margin-right: 55px;
     margin-top: -55px;
+    display: inline-block;
+    max-height: 500px;
     width: 100%;
     position: relative;
-    min-height: 500px;
 
     @include r(1125px) {
       margin: 0 auto;
@@ -234,12 +235,7 @@
     @include r($md) {
       max-width: 345px;
       width: 100%;
-      min-height: 350px;
       margin: 0 auto;
-    }
-
-    @include r(440px) {
-      display: none;
     }
 
     &::after {
@@ -257,6 +253,10 @@
         width: 265px;
         height: 265px;
         top: 10px;
+      }
+
+      @include r(440px) {
+        display: none;
       }
     }
 
@@ -277,6 +277,10 @@
         bottom: 20px;
         left: 0px;
       }
+
+      @include r(440px) {
+        display: none;
+      }
     }
   }
 
@@ -284,8 +288,8 @@
     max-width: 100%;
     width: 100%;
     position: relative;
-    min-height: 100%;
-    background-size: cover;
+    height: 100%;
+    object-fit: cover;
     display: inline-block;
     z-index: 1;
   }
@@ -311,14 +315,41 @@
   background-color: #fff;
   padding: 80px 40px;
 
+  @include r($md) {
+    padding: 0 20px;
+  }
+
   &__list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+
+    @include r(1329px) {
+      justify-content: center;
+    }
   }
 
   &__item {
     max-width: 390px;
     border: 1px solid #fff;
+    box-shadow: 0px 4px 20px rgba(25, 25, 25, 0.05);
+    border-radius: 24px;
+    
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    @include r(1329px) {
+      margin-bottom: 30px;
+    }
+
+    @include r($md) {  
+      max-width: 100%;
+    }
+    
+    @include r($sm) {
+      margin-bottom: 15px;
+    }
   }
 
   &__top {
