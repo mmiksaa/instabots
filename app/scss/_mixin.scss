@@ -2,6 +2,7 @@
   -webkit-line-clamp: $num;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @mixin r($width) {

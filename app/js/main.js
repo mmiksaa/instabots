@@ -1,6 +1,6 @@
-$(function(){
-  
-  $('.work__tabs-btn').on('click', function(e){
+$(function () {
+
+  $('.work__tabs-btn').on('click', function (e) {
     e.preventDefault();
     $('.work__tabs-btn').removeClass('work__tabs-btn--active');
     $(this).addClass('work__tabs-btn--active');
@@ -16,7 +16,7 @@ $(function(){
     readOnly: true,
   });
 
-  $('.reviews__btn').on('click', function(){
+  $('.reviews__btn').on('click', function () {
     $('.reviews__list').toggleClass('reviews__list--active')
     $('.reviews__btn').toggleClass('reviews__btn--active')
   });
@@ -27,11 +27,33 @@ $(function(){
     $(this).parent().toggleClass('question-card--active');
   });
 
-  $('.burger').on('click', function(){
+  $('.burger').on('click', function () {
     $('.header__nav').toggleClass('header__nav--active');
     $('.burger').toggleClass('burger--active');
-    $('body').toggleClass('body--active');
+    $('.header__top').toggleClass('header__top--active');
   });
 
-});
+   $(window).scroll(function () {
+     if (this.scrollY > 50) {
+       $('.header__top').addClass("header__top--sticky");
+     } else {
+       $('.header__top').removeClass("header__top--sticky");
+     }
+   });
 
+   $(".header, .footer, .header__nav").on("click", "a", function (e) {
+     e.preventDefault();
+     var id = $(this).attr('href'),
+       top = $(id).offset().top;
+     $('body,html').animate({
+       scrollTop: top
+     }, 300);
+   });
+
+   $('.header__nav-link').on('click', function () {
+     $('.burger').removeClass('burger--active');
+     $('.header__nav').removeClass('header__nav--active');
+     $('.header__top').removeClass('header__top--active');
+   });
+
+});

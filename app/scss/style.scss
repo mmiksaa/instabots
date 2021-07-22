@@ -17,8 +17,7 @@
   }
 
   &__container {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 24px 24px 0 0;
   }
 
   &__inner {
@@ -40,14 +39,38 @@
     align-items: center;
     padding: 16px 0;
     margin-bottom: 120px;
+    transition: 1s border-radius, 2s background-color, 1s padding;
 
     @include r($lr) {
       margin-bottom: 10px;
     }
 
     @include r($md) {
-      margin-bottom: 40px;
-    } 
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 22;
+      width: 100%;
+      padding: 25px 30px 16px 30px;
+
+      @include r($sm) {
+        padding: 20px;
+      }
+
+      &--sticky {
+        background: rgba(71, 84, 235, 0.6);
+        backdrop-filter: blur(5px);
+        padding: 16px;
+
+        @include r($sm) {
+          padding: 5px 10px;
+        }
+      }
+
+      &--active {
+        border-radius: 24px 24px 0 0;
+      }
+    }
   }
 
   &__box {
@@ -77,12 +100,12 @@
 
     @include r($lr) {
       width: 100%;
-      transform: translateY(-200%);
       order: 3;
     }
 
     @include r($md) {
       background: rgba(255, 255, 255, 0.65);
+      transform: translateY(-200%);
       border-radius: 24px;
       color: $dark;
       background-color: #fff;
@@ -93,7 +116,7 @@
       top: 0;
       display: block;
       left: 0;
-      height: calc(100vh - 30px);
+      height: 99vh;
     }
 
     &--active {
@@ -115,6 +138,7 @@
       border-radius: 24px;
       overflow: auto;
       width: 100%;
+      height: 100%;
 
       &::before {
         content: 'menu';
@@ -174,6 +198,7 @@
     font-size: 56px;
     line-height: 1.2;
     margin-bottom: 40px;
+    @include line-clamp(4);
 
     @include r($sm) {
       font-size: 36px;
@@ -186,31 +211,13 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 30px;
-  }
 
-  &__email {
-
-    @include r(387px) {
-      font-size: 16px;
-      padding: 5px 10px;
-      min-height: 50px;
+    @include r($md) {
+      padding-top: 120px;
     }
-  }
-
-  &__email-btn {
-
-    @include r(387px) {
-      position: relative;
-      width: 100%;
-      transform: translateY(0);
-      right: 0;
-    }
-  }
-
-  &__email-form {
 
     @include r($sm) {
-      flex-wrap: wrap;
+      padding-top: 100px;
     }
   }
 
@@ -320,6 +327,17 @@
     padding-left: 20px;
   }
 
+  @include r($sm) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  &__title {
+    @include r($sm) {
+      padding-left: 12px;
+    }
+  }
+
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -347,6 +365,10 @@
 
     @include r($md) {  
       max-width: 100%;
+
+      &:not(:last-child) {
+        margin-right: 0;
+      }
     }
     
     @include r($sm) {
@@ -354,9 +376,8 @@
     }
   }
 
-  &__top {
+  &__top-wrapp {
     color: $dark;
-    font-weight: 500;
     max-width: 440px;
     min-height: 80px;
     padding-left: 16px;
@@ -366,27 +387,48 @@
     display: flex;
     align-items: center;
 
+    @include r($sm) {
+      max-width: 90%;
+    }
+
     &::before {
       margin-right: 12px;
+      max-width: 56px;
+      width: 100%;
+      min-height: 56px;
+      padding-right: 5px;
+
+      @include r($sm) {
+        padding-right: 50px;
+      }
     }
 
     &--simpl {
       &::before {
-        content: url('../images/content/advantages/1.png');
+        content: '';
+        background-image: url('../images/content/advantages/1.png');
       }
     }
 
     &--fast {
       &::before {
-        content: url('../images/content/advantages/2.png');
+        content: '';
+        background-image: url('../images/content/advantages/2.png');
       }
     }
 
     &--qualitatively {
       &::before {
-        content: url('../images/content/advantages/3.png');
+        content: '';
+        background-image: url('../images/content/advantages/3.png');
       }
     }
+  }
+
+  &__top {
+    font-weight: 500;
+    @include line-clamp(2);
+    max-width: 249px;
   }
 
 &__wrapp {
@@ -397,7 +439,11 @@
   &__text {
     @include line-clamp(5);
     overflow: auto;
-    padding-right: 5px;  
+    padding-right: 5px;
+
+    @include r($sm) {
+      font-size: 14px;
+    }
   }
 }
 
@@ -421,17 +467,16 @@
     }
   }
 
-  &__img {
+  &__wrapp {
     max-width: 540px;
     min-height: 540px;
-    background-size: cover;
-    margin: 0 25px 0 90px;
-    width: 100%;
     position: relative;
+    width: 100%;
+    z-index: 2;
+    margin: 0 25px 0 90px;
 
     @include r(1160px) {
       margin: 0;
-      margin-bottom: 30px;
     }
 
     @include r($md) {
@@ -444,25 +489,21 @@
       min-height: 340px;
     }
 
+    @include r(400px) {
+      max-width: 230px;
+      min-height: 230px;
+    }
+
     &::after {
       content: '';
-      max-width: 540px;
+      max-width: 100%;
       width: 100%;
-      min-height: 540px;
+      min-height: 100%;
       border-radius: 50%;
       background-color: #fff;
-      z-index: -1;
+      z-index: 1;
+      bottom: 0;
       position: absolute;
-
-      @include r($md) {
-        max-width: 440px;
-        min-height: 440px;
-      }
-
-      @include r(560px) {
-        max-width: 340px;
-        min-height: 340px;
-      }
     }
 
     &::before {
@@ -472,7 +513,7 @@
       min-height: 300px;
       border-radius: 50%;
       background-color: #EB478B;
-      z-index: -1;
+      z-index: 0;
       position: absolute;
       bottom: 0;
       left: -90px;
@@ -483,8 +524,20 @@
     }
   }
 
+  &__img {
+    max-width: 100%;
+    min-height: 100%;
+    position: relative;
+    z-index: 2;
+    object-fit: cover;
+  }
+
   &__tabs {
     position: relative;
+
+    @include r(1260px) {
+      margin-top: 30px;
+    }
 
     &-item {
       display: none;
@@ -497,14 +550,38 @@
     &-buttons {
       color: #fff;
       margin-bottom: 30px;
+
+      @include r($md) {
+        margin-bottom: 25px;
+      }
     }
 
     &-btn {
       position: relative;
       transition: 0.3s color, 0s font-weight;
 
+      @include r($lr) {
+        padding: 15px 0;
+      }
+
+      @include r($sm) {
+        font-size: 14px;
+      }
+
+      @include r(1329px) {
+        color: $dark-light;
+      }
+
+      &:hover {
+        border: none;
+      }
+
       &:not(:last-child) {
         margin-right: 55px;
+
+        @include r($sm) {
+          margin-right: 30px;
+        }
 
         &::after {
           content: '';
@@ -512,20 +589,43 @@
           width: 24px;
           height: 2px;
           position: absolute;
-          top: 7px;
+          top: 50%;
+          transform: translateY(-50%);
           right: -40px;
+
+          @include r(1329px) {
+            background-color: #ccc;
+          }
+
+          @include r($lr) {
+            
+          }
+
+          @include r($md) {
+            width: 16px;
+            right: -35px;
+          }
+
+          @include r($sm) {
+            right: -25px;
+          }
         }
       }
 
       &--active {
         color: $blue;
         font-weight: 500;
+
+        @include r($md) {
+          font-weight: 400;
+        }
       }
     }
 
     &-title {
       margin-bottom: 15px;
       max-width: 460px;
+      @include line-clamp(3);
     }
 
     &-desc {
@@ -533,6 +633,11 @@
       font-weight: 500;
       display: inline-block;
       margin-bottom: 25px;
+      @include line-clamp(2);
+
+      @include r($sm) {
+        font-size: 14px;
+      }
     }
 
     &-txt {
@@ -556,6 +661,10 @@
 
     &-text {
 
+      @include r($md) {
+        font-size: 14px;
+      }
+
       &:not(:last-child) {
         margin-bottom: 15px;
       }
@@ -566,7 +675,7 @@
     position: absolute;
     bottom: -10px;
 
-    @include r(1160px) {
+    @include r(1260px) {
       position: static;
       margin-top: 10px;
     }
@@ -585,6 +694,40 @@
   &__list {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include r($lr) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 30px;
+    }
+
+    @include r($sm) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    @include r($lr) {
+      margin: 0 auto;  
+    }
+
+    @include r($sm) {
+      width: 100%;
+    }
+
+    &:not(:last-child) {
+      margin-right: 15px;
+      
+      @include r(1288px) {
+        margin-bottom: 30px;
+      }
+
+      @include r($lr) {
+        margin: 0 auto;
+      }
+    }
   }
 
   &__title {
@@ -608,10 +751,28 @@
   &__padding {
     min-height: 800px;
     padding: 80px 30px;
+
+    @include r($sm) {
+      padding: 40px 0;
+    }
+  }
+
+  &__title {
+    @include r($sm) {
+      padding-left: 15px;
+    }
   }
 
   &__item {
     position: absolute;
+
+    @include r($md) {
+      position: static;
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+    }
 
     &--semyon {
       top: 160px;
@@ -644,6 +805,10 @@
     right: 60px;
     z-index: 5;
 
+    @include r($md) {
+      display: none;
+    }
+
     &::after {
       content: 'Structuring cats';
     }
@@ -670,15 +835,43 @@
   z-index: 1;
   padding: 80px 40px;
 
+  @include r($sm) {
+    padding: 12px;
+  }
+
+  @include r(1200px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   &__img {
-    background-image: url('../images/content/price/1.png');
     max-width: 635px;
     width: 100%;
     min-height: 465px;
     margin-right: 115px;
     position: relative;
     display: inline-block;
-    object-fit: cover;
+    background-size: cover;
+
+    @include r(1200px) {
+      margin: 0 0 50px;
+    }
+
+    @include r($md) {
+      max-width: 495px;
+      min-height: 365px;
+      top: 0;
+    }
+
+    @include r(560px) {
+      max-width: 328px;
+      min-height: 243px;
+    }
+
+    @include r(410px) {
+      max-width: 228px;
+      min-height: 172px;
+    }
 
     &::before {
       content: '';
@@ -691,6 +884,24 @@
       right: 100px;
       bottom: 0;
       z-index: -1;
+      background-size: cover;
+
+      @include r($md) {
+        max-width: 365px;
+        min-height: 365px;
+      }
+
+      @include r(560px) {
+        max-width: 265px;
+        min-height: 265px;
+        right: 50px;
+      }
+
+      @include r(410px) {
+        max-width: 205px;
+        min-height: 205px;
+        right: 0;
+      }
     }
   }
 
@@ -702,6 +913,11 @@
   &__title {
     font-size: 55px;
     margin-bottom: 20px;
+
+    @include r($sm) {
+      font-size: 36px;
+      line-height: 1;
+    }
   }
 
   &__email {
@@ -720,6 +936,18 @@
 
 .question {
 
+  &__padding {
+    @include r($sm) {
+      padding: 0;
+    }
+  }
+
+  &__title {
+    @include r($sm) {
+      padding-left: 12px;
+    }
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
@@ -736,17 +964,51 @@
   align-items: center;
   display: flex;
 
+  @include r(1300px) {
+    justify-content: space-between;
+  }
+
+  @include r($sm) {
+    padding: 0;
+  }
+
   &__content {
     max-width: 465px;
     margin-right: 180px;
+
+    @include r(1300px) {
+      margin-right: 0;
+    }
+
+    @include r(910px) {
+      max-width: 100%;
+    }
   }
 
   &__title {
     margin-bottom: 15px;
+    max-width: 465px;
+
+    @include r($sm) {
+      padding-left: 5px;
+    }
+  }
+  
+  &__btn {
+    @include r($sm) {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &__text {
     margin-bottom: 25px;
+    max-width: 465px;
+    @include line-clamp(5);
+
+    @include r($sm) {
+      padding-left: 5px;
+    }
   }
 
   &__img {
@@ -762,15 +1024,29 @@
     background-position: bottom;
     background-repeat: no-repeat;
 
+    @include r(1700px) {
+      max-width: 434px;
+      min-height: 455px;
+    }
+
+    @include r(1050px) {
+      max-width: 304px;
+      min-height: 325px;
+    }
+
+    @include r(910px) {
+      display: none;
+    }
+
     &::before {
       content: '';
       background-image: url('../images/content/feedback/2.png');
-      max-width: 534px;
+      max-width: 100%;
       width: 100%;
       position: absolute;
       bottom: 0;
       border-radius: 0 0 50% 50%;
-      min-height: 555px;
+      min-height: 100%;
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -784,6 +1060,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 0 0 24px 24px;
+
+  @include r($sm) {
+    font-size: 14px;
+    padding: 16px 5px;
+  }
 
   &__left {
     display: flex;
@@ -796,10 +1078,15 @@
 
   &__desc {
     max-width: 190px;
+
+    @include r($sm) {
+      max-width: 150px;
+    }
   }
 
   &__up {
     transition: 0.4s color;
+    display: flex;
   
     &:hover{
       color: $dark;
