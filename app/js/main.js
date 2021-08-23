@@ -31,6 +31,7 @@ $(function () {
     $('.header__nav').toggleClass('header__nav--active');
     $('.burger').toggleClass('burger--active');
     $('.header__top').toggleClass('header__top--active');
+    $('body').toggleClass('body--active');
   });
 
    $(window).scroll(function () {
@@ -54,6 +55,7 @@ $(function () {
      $('.burger').removeClass('burger--active');
      $('.header__nav').removeClass('header__nav--active');
      $('.header__top').removeClass('header__top--active');
+     $('body').removeClass('body--active');
    });
 
 });

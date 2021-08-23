@@ -5,8 +5,14 @@
   overflow: hidden;
 }
 
-@mixin r($width) {
+@mixin maxw($width) {
   @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin maxh($height) {
+  @media only screen and (max-height: $height) {
     @content;
   }
 }

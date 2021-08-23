@@ -8,11 +8,11 @@
 .header {
   position: relative;
 
-  @include r($md) {
+  @include maxw($md) {
     overflow: hidden;
   }
 
-  @include r($sm) {
+  @include maxw($sm) {
     overflow: visible;
   }
 
@@ -23,12 +23,12 @@
   &__inner {
     padding: 0 35px 80px;
 
-    @include r($lr) {
-      padding: 0 30px 60px 25px;
+    @include maxw($lr) {
+      padding: 0 10px 60px;
     }
 
-    @include r($sm) {
-      padding: 0 12px 40px 12px;
+    @include maxw($sm) {
+      padding: 0 10px 40px;
     }
   }
   
@@ -41,11 +41,11 @@
     margin-bottom: 120px;
     transition: 1s border-radius, 2s background-color, 1s padding;
 
-    @include r($lr) {
+    @include maxw($lr) {
       margin-bottom: 10px;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       position: fixed;
       right: 0;
       top: 0;
@@ -53,22 +53,23 @@
       width: 100%;
       padding: 25px 30px 16px 30px;
 
-      @include r($sm) {
+      @include maxw($sm) {
         padding: 20px;
       }
 
       &--sticky {
         background: rgba(71, 84, 235, 0.6);
         backdrop-filter: blur(5px);
-        padding: 16px;
+        padding: 5px 16px;
 
-        @include r($sm) {
+        @include maxw($sm) {
           padding: 5px 10px;
         }
       }
 
       &--active {
         border-radius: 24px 24px 0 0;
+        padding-top: 20px;
       }
     }
   }
@@ -81,11 +82,11 @@
   &__btn {
     z-index: 30;
 
-    @include r($sm) {
+    @include maxw($sm) {
       border-radius: 50%;
     }
 
-    @include r($sm) {
+    @include maxw($sm) {
       content: url('../images/icons/profile.svg');
       padding: 13px 15px;
     }
@@ -98,12 +99,12 @@
   &__nav {
     transition: 0.5s transform;
 
-    @include r($lr) {
+    @include maxw($lr) {
       width: 100%;
       order: 3;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       background: rgba(255, 255, 255, 0.65);
       transform: translateY(-200%);
       border-radius: 24px;
@@ -116,7 +117,22 @@
       top: 0;
       display: block;
       left: 0;
-      height: 99vh;
+      height: 100vh;
+
+      &::before {
+        content: 'menu';
+        text-decoration: underline;
+        color: $gray;
+        font-weight: 500;
+        position: absolute;
+        font-size: 24px;
+        top: 100px;
+        left: 50px;
+
+        @include maxw($sm) {
+          left: 30px;
+        }
+      }
     }
 
     &--active {
@@ -127,31 +143,18 @@
   &__nav-list {
     display: flex;
 
-    @include r($lr) {
+    @include maxw($lr) {
       padding: 20px 0;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       flex-direction: column;
-      padding: 140px 55px 0;
-      backdrop-filter: blur(320px);
+      margin-top: 150px;
+      padding-bottom: 150px;
       border-radius: 24px;
       overflow: auto;
       width: 100%;
       height: 100%;
-
-      &::before {
-        content: 'menu';
-        text-decoration: underline;
-        color: $gray;
-        font-weight: 500;
-        margin-bottom: 40px;
-        font-size: 24px;
-      }
-    }
-
-    @include r($sm) {
-      padding: 140px 30px 0;
     }
   }
 
@@ -159,30 +162,22 @@
   
     &:not(:last-child) {
       margin-right: 25px;
-
-      @include r($lr) {
-        margin-bottom: 35px;
-      }
-
-      @include r($sm) {
-        margin-bottom: 15px;
-      }
     }
 
-    @include r($md) {
+    @include maxw($md) {
       font-size: 56px;
       font-weight: 500;
     }
 
-    @include r(595px) {
+    @include maxw(595px) {
       font-size: 36px;
     }
 
-    @include r(450px) {
+    @include maxw(450px) {
       font-size: 30px;
     }
 
-    @include r(375px) {
+    @include maxw(375px) {
       font-size: 24px;
     }
   }
@@ -200,9 +195,26 @@
     margin-bottom: 40px;
     @include line-clamp(4);
 
-    @include r($sm) {
+    @include maxw($sm) {
       font-size: 36px;
       font-size: 23px;
+    }
+  }
+
+  &__nav-link {
+    @include maxw($lr) {
+      margin-bottom: 35px;
+    }
+
+    @include maxw($md) {
+      display: inline-block;
+      width: 100%;
+      padding: 0 50px;
+      margin-bottom: 15px;
+    }
+
+    @include maxw($sm) {
+      padding: 0 30px;
     }
   }
 
@@ -212,11 +224,11 @@
     flex-wrap: wrap;
     margin-bottom: 30px;
 
-    @include r($md) {
+    @include maxw($md) {
       padding-top: 120px;
     }
 
-    @include r($sm) {
+    @include maxw($sm) {
       padding-top: 100px;
     }
   }
@@ -230,16 +242,16 @@
     width: 100%;
     position: relative;
 
-    @include r(1125px) {
+    @include maxw(1125px) {
       margin: 0 auto;
     }
 
-    @include r(612px) {
+    @include maxw(612px) {
       margin-left: -100px;
       width: 500px;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       max-width: 345px;
       width: 100%;
       margin: 0 auto;
@@ -256,13 +268,13 @@
       top: -10px;
       z-index: 0;
 
-      @include r($md) {
+      @include maxw($md) {
         width: 265px;
         height: 265px;
         top: 10px;
       }
 
-      @include r(440px) {
+      @include maxw(440px) {
         display: none;
       }
     }
@@ -278,14 +290,14 @@
       left: -50px;
       z-index: 0;
 
-      @include r($md) {
+      @include maxw($md) {
         width: 185px;
         height: 185px;
         bottom: 20px;
         left: 0px;
       }
 
-      @include r(440px) {
+      @include maxw(440px) {
         display: none;
       }
     }
@@ -306,7 +318,7 @@
     display: flex;
     align-items: center;
 
-    @include r($md) {
+    @include maxw($md) {
       display: none;
     }
 
@@ -322,18 +334,18 @@
   background-color: #fff;
   padding: 80px 40px;
 
-  @include r($md) {
+  @include maxw($md) {
     padding-right: 20px; 
     padding-left: 20px;
   }
 
-  @include r($sm) {
+  @include maxw($sm) {
     padding-right: 0;
     padding-left: 0;
   }
 
   &__title {
-    @include r($sm) {
+    @include maxw($sm) {
       padding-left: 12px;
     }
   }
@@ -343,7 +355,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-    @include r(1329px) {
+    @include maxw(1329px) {
       justify-content: center;
     }
   }
@@ -359,11 +371,11 @@
       margin-right: 15px;
     }
 
-    @include r(1329px) {
+    @include maxw(1329px) {
       margin-bottom: 30px;
     }
 
-    @include r($md) {  
+    @include maxw($md) {  
       max-width: 100%;
 
       &:not(:last-child) {
@@ -371,7 +383,7 @@
       }
     }
     
-    @include r($sm) {
+    @include maxw($sm) {
       margin-bottom: 15px;
     }
   }
@@ -387,7 +399,7 @@
     display: flex;
     align-items: center;
 
-    @include r($sm) {
+    @include maxw($sm) {
       max-width: 90%;
     }
 
@@ -398,7 +410,7 @@
       min-height: 56px;
       padding-right: 5px;
 
-      @include r($sm) {
+      @include maxw($sm) {
         padding-right: 50px;
       }
     }
@@ -441,7 +453,7 @@
     overflow: auto;
     padding-right: 5px;
 
-    @include r($sm) {
+    @include maxw($sm) {
       font-size: 14px;
     }
   }
@@ -452,7 +464,7 @@
   &__padding {
     padding: 80px 52px;
 
-    @include r($md) {
+    @include maxw($md) {
       padding-left: 20px;
       padding-right: 20px;
     }
@@ -461,7 +473,7 @@
   &__content {
     display: flex;
 
-    @include r(1260px) {
+    @include maxw(1260px) {
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -475,21 +487,21 @@
     z-index: 2;
     margin: 0 25px 0 90px;
 
-    @include r(1160px) {
+    @include maxw(1160px) {
       margin: 0;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       max-width: 440px;
       min-height: 440px;
     }
 
-    @include r(560px) {
+    @include maxw(560px) {
       max-width: 340px;
       min-height: 340px;
     }
 
-    @include r(400px) {
+    @include maxw(400px) {
       max-width: 230px;
       min-height: 230px;
     }
@@ -518,7 +530,7 @@
       bottom: 0;
       left: -90px;
 
-      @include r($md) {
+      @include maxw($md) {
         display: none;
       }
     }
@@ -535,7 +547,7 @@
   &__tabs {
     position: relative;
 
-    @include r(1260px) {
+    @include maxw(1260px) {
       margin-top: 30px;
     }
 
@@ -551,7 +563,7 @@
       color: #fff;
       margin-bottom: 30px;
 
-      @include r($md) {
+      @include maxw($md) {
         margin-bottom: 25px;
       }
     }
@@ -560,15 +572,15 @@
       position: relative;
       transition: 0.3s color, 0s font-weight;
 
-      @include r($lr) {
+      @include maxw($lr) {
         padding: 15px 0;
       }
 
-      @include r($sm) {
+      @include maxw($sm) {
         font-size: 14px;
       }
 
-      @include r(1329px) {
+      @include maxw(1329px) {
         color: $dark-light;
       }
 
@@ -579,7 +591,7 @@
       &:not(:last-child) {
         margin-right: 55px;
 
-        @include r($sm) {
+        @include maxw($sm) {
           margin-right: 30px;
         }
 
@@ -593,20 +605,20 @@
           transform: translateY(-50%);
           right: -40px;
 
-          @include r(1329px) {
+          @include maxw(1329px) {
             background-color: #ccc;
           }
 
-          @include r($lr) {
+          @include maxw($lr) {
             
           }
 
-          @include r($md) {
+          @include maxw($md) {
             width: 16px;
             right: -35px;
           }
 
-          @include r($sm) {
+          @include maxw($sm) {
             right: -25px;
           }
         }
@@ -616,7 +628,7 @@
         color: $blue;
         font-weight: 500;
 
-        @include r($md) {
+        @include maxw($md) {
           font-weight: 400;
         }
       }
@@ -635,7 +647,7 @@
       margin-bottom: 25px;
       @include line-clamp(2);
 
-      @include r($sm) {
+      @include maxw($sm) {
         font-size: 14px;
       }
     }
@@ -661,7 +673,7 @@
 
     &-text {
 
-      @include r($md) {
+      @include maxw($md) {
         font-size: 14px;
       }
 
@@ -675,12 +687,12 @@
     position: absolute;
     bottom: -10px;
 
-    @include r(1260px) {
+    @include maxw(1260px) {
       position: static;
       margin-top: 10px;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       width: 100%;
       text-align: center;
       margin-top: 30px;
@@ -696,35 +708,35 @@
     justify-content: space-between;
     flex-wrap: wrap;
 
-    @include r($lr) {
+    @include maxw($lr) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 30px;
     }
 
-    @include r($sm) {
+    @include maxw($sm) {
       display: flex;
       flex-direction: column;
     }
   }
 
   &__item {
-    @include r($lr) {
+    @include maxw($lr) {
       margin: 0 auto;  
     }
 
-    @include r($sm) {
+    @include maxw($sm) {
       width: 100%;
     }
 
     &:not(:last-child) {
       margin-right: 15px;
       
-      @include r(1288px) {
+      @include maxw(1288px) {
         margin-bottom: 30px;
       }
 
-      @include r($lr) {
+      @include maxw($lr) {
         margin: 0 auto;
       }
     }
@@ -752,13 +764,13 @@
     min-height: 800px;
     padding: 80px 30px;
 
-    @include r($sm) {
+    @include maxw($sm) {
       padding: 40px 0;
     }
   }
 
   &__title {
-    @include r($sm) {
+    @include maxw($sm) {
       padding-left: 15px;
     }
   }
@@ -766,7 +778,7 @@
   &__item {
     position: absolute;
 
-    @include r($md) {
+    @include maxw($md) {
       position: static;
 
       &:not(:last-child) {
@@ -805,7 +817,7 @@
     right: 60px;
     z-index: 5;
 
-    @include r($md) {
+    @include maxw($md) {
       display: none;
     }
 
@@ -835,11 +847,11 @@
   z-index: 1;
   padding: 80px 40px;
 
-  @include r($sm) {
+  @include maxw($sm) {
     padding: 12px;
   }
 
-  @include r(1200px) {
+  @include maxw(1200px) {
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -853,22 +865,22 @@
     display: inline-block;
     background-size: cover;
 
-    @include r(1200px) {
+    @include maxw(1200px) {
       margin: 0 0 50px;
     }
 
-    @include r($md) {
+    @include maxw($md) {
       max-width: 495px;
       min-height: 365px;
       top: 0;
     }
 
-    @include r(560px) {
+    @include maxw(560px) {
       max-width: 328px;
       min-height: 243px;
     }
 
-    @include r(410px) {
+    @include maxw(410px) {
       max-width: 228px;
       min-height: 172px;
     }
@@ -886,18 +898,18 @@
       z-index: -1;
       background-size: cover;
 
-      @include r($md) {
+      @include maxw($md) {
         max-width: 365px;
         min-height: 365px;
       }
 
-      @include r(560px) {
+      @include maxw(560px) {
         max-width: 265px;
         min-height: 265px;
         right: 50px;
       }
 
-      @include r(410px) {
+      @include maxw(410px) {
         max-width: 205px;
         min-height: 205px;
         right: 0;
@@ -914,7 +926,7 @@
     font-size: 55px;
     margin-bottom: 20px;
 
-    @include r($sm) {
+    @include maxw($sm) {
       font-size: 36px;
       line-height: 1;
     }
@@ -937,13 +949,13 @@
 .question {
 
   &__padding {
-    @include r($sm) {
+    @include maxw($sm) {
       padding: 0;
     }
   }
 
   &__title {
-    @include r($sm) {
+    @include maxw($sm) {
       padding-left: 12px;
     }
   }
@@ -964,11 +976,11 @@
   align-items: center;
   display: flex;
 
-  @include r(1300px) {
+  @include maxw(1300px) {
     justify-content: space-between;
   }
 
-  @include r($sm) {
+  @include maxw($sm) {
     padding: 0;
   }
 
@@ -976,11 +988,11 @@
     max-width: 465px;
     margin-right: 180px;
 
-    @include r(1300px) {
+    @include maxw(1300px) {
       margin-right: 0;
     }
 
-    @include r(910px) {
+    @include maxw(910px) {
       max-width: 100%;
     }
   }
@@ -989,13 +1001,13 @@
     margin-bottom: 15px;
     max-width: 465px;
 
-    @include r($sm) {
+    @include maxw($sm) {
       padding-left: 5px;
     }
   }
   
   &__btn {
-    @include r($sm) {
+    @include maxw($sm) {
       width: 100%;
       text-align: center;
     }
@@ -1006,7 +1018,7 @@
     max-width: 465px;
     @include line-clamp(5);
 
-    @include r($sm) {
+    @include maxw($sm) {
       padding-left: 5px;
     }
   }
@@ -1024,17 +1036,17 @@
     background-position: bottom;
     background-repeat: no-repeat;
 
-    @include r(1700px) {
+    @include maxw(1700px) {
       max-width: 434px;
       min-height: 455px;
     }
 
-    @include r(1050px) {
+    @include maxw(1050px) {
       max-width: 304px;
       min-height: 325px;
     }
 
-    @include r(910px) {
+    @include maxw(910px) {
       display: none;
     }
 
@@ -1062,7 +1074,7 @@
   justify-content: space-between;
   border-radius: 0 0 24px 24px;
 
-  @include r($sm) {
+  @include maxw($sm) {
     font-size: 14px;
     padding: 16px 5px;
   }
@@ -1079,7 +1091,7 @@
   &__desc {
     max-width: 190px;
 
-    @include r($sm) {
+    @include maxw($sm) {
       max-width: 150px;
     }
   }
